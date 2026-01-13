@@ -12,26 +12,56 @@ display.value = ''
 
 let problemSolved = false;
 
+
+
+// check for percent sign
+function checkPercent () {
+  if (number1.includes('%')) {
+    let newNumber1 = ''
+    for (let i = 0; i < number1.length; i++ ) {
+      if (number1[i] != '%') {
+        newNumber1 += number1[i];
+      }
+    }
+    number1 = Number(newNumber1) / 100;
+  }
+  if (number2.includes('%')) {
+    let newNumber2 = ''
+    for (let i = 0; i < number2.length; i++ ) {
+      if (number2[i] != '%') {
+        newNumber2 += number2[i];
+      }
+    }
+    number2 = Number(newNumber2) / 100;
+  }
+}
+
+// equal function 
 function solveProblem () {
   let answer = null
   if (number1 && number2) {
     if (operator === '+') {
+      checkPercent()
       answer = Number(number1) + Number(number2)
     } else if (operator === '-') {
+      checkPercent()
       answer = Number(number1) - Number(number2)
     } else if (operator === '*') {
+      checkPercent()
       answer = Number(number1) * Number(number2)
     } else if (operator === '/') {
       if (Number(number2) !== 0) {
+        checkPercent()
         answer = Number(number1) / Number(number2)
       } else {
-        answer = 'error'
+        answer = 'error';
       }
     } 
+      
   } else {
     answer = 'error';
   }
-  
+
   problemSolved = true;
   display.value = answer;
 }
@@ -60,15 +90,24 @@ for (let i = 0; i < keypad.length; i++) {
       return;
     }
 
+    if (keypad[i].value === '%' && number1.includes('%') && !operator) {
+      return;
+    }
+    if (keypad[i].value === '%' && number2.includes('%') && operator) {
+      return;
+    }
+
 
     // keypad logic - logs numbers and operators to desired variable and displays it to screen
     if (keypad[i].value !== 'delete' && keypad[i].value !== 'clear' ) {
       if (number1.length <= 9 && !operator) {
         number1 += keypad[i].value
         display.value += keypad[i].value
+        console.log(`number1 is ${number1}`)
       } else if (number2.length <= 9 && operator) {
         number2 += keypad[i].value 
         display.value += keypad[i].value
+        console.log(`number2 is ${number2}`)
       }
     }
 
@@ -85,6 +124,7 @@ for (let i = 0; i < keypad.length; i++) {
       display.value = display.value.slice(0, -1);
     }
 
+
     // keypad logic - clear button clears all variables and screen output
     if (keypad[i].value === 'clear') {
       number1 = '';
@@ -93,8 +133,9 @@ for (let i = 0; i < keypad.length; i++) {
       display.value = ''
     }
 
+
     // alert to new features yet to be added
-    if (keypad[i].textContent === '+/-' || keypad[i].textContent === '%') {
+    if (keypad[i].textContent === '+/-') {
       alert('Feature coming soon...')
     }
     
