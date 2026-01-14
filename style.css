@@ -1,24 +1,36 @@
 .container {
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 30%;
-  height: 70%;
   padding: 20px;
-  overflow: hidden;
   border-radius: 15px;
 }
 .container {
   background-color: rgb(92, 92, 92);
-  display: flex;
-  flex-direction: column;
+  font-size: 18px;
+  /* resize: both; */
+  /* min-width: min-content;*/  /* Working on resizable function */
+  /* min-height: min-content;
+  max-width: max-content;
+  max-height: max-content;
+  overflow: auto; */
+  /* display: flex;
+  flex-direction: column; */
+}
+
+.handle {
+  background-color:  rgb(92, 92, 92);
+  color: white;
+  text-align: center;
+  cursor: move; 
+  font-size: 1.25rem;
 }
 
 /* Input textarea styles */
 .input-container  {
   width: 100%;
-  height: 30%;
   box-sizing: border-box; /*Ensures padding doesn't increase the width */
   margin-bottom: 10px; 
   resize: none; /* Prevents the user from breaking your layout */
@@ -27,28 +39,29 @@
 }
 input {
   width: 90%;
-  height: 65%;
-  padding: 1.5em;
   border: none;
-  border-radius: 15px 15px 0px 0px;
-  font-size: 0.5em;
+  border-radius: 15px;
+  font-size: 2.2rem;
+  padding: 0.75em;
 }
 
 
 
 /* button input styles */
 button {
-  padding: 2em;
   width: 25%;
   height: 25%;
-  font-size: 1.25rem;
+  font-size: 2rem;
+  padding: 1.2em;
   font-weight: bold;
   text-align: center;
   border: none;
   background-color: hsl(0, 0%, 82%);
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 50px;
+  overflow: hidden;
 }
+
 button:hover {
   background-color: hsl(0, 0%, 73%);;
 }
@@ -103,7 +116,7 @@ button:active {
   background-color: hsl(40, 100%, 60%);
 }
 
+
 * {
-  font-family: "Orbitron", sans-serif;;
-  font-weight: 500;
+  font-family: "Orbitron", sans-serif;
 }
