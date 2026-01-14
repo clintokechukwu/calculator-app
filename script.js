@@ -5,13 +5,63 @@ const keypadOperators = document.querySelectorAll('.keypad-operator');
 const display = document.getElementById('display');
 const equal = document.getElementById('solve-problem');
 
+const handle = document.querySelector('.container');
+
+
+
+
+// Calculator Movability //
+let newX = 0, newY = 0, startX = 0, startY = 0;
+
+function mouseMove (e) {
+  newX = startX - e.clientX;
+  newY = startY - e.clientY;
+  
+  startX = e.clientX;
+  startY = e.clientY;
+  
+  handle.style.top = (handle.offsetTop - newY) + 'px';
+  handle.style.left = (handle.offsetLeft - newX) + 'px';
+  
+  console.log({newX, newY})
+  console.log({startX, startY})
+  
+}
+
+function mouseUp (e) {
+  document.removeEventListener('mousemove', mouseMove)
+}
+
+
+function mouseDown (e) {
+  startX = e.clientX;
+  startY = e.clientY;
+  console.log(startX, startY);
+  
+  document.addEventListener('mousemove', mouseMove);
+  
+  document.addEventListener('mouseup', mouseUp);
+}
+
+
+
+
+handle.addEventListener('mousedown', mouseDown)
+
+
+
+
+
+
+
+
+// Calculator Operations //
 let operator = '';
 let number1 = '';
 let number2 = '';
 display.value = ''
 
 let problemSolved = false;
-
 
 
 // check for percent sign
