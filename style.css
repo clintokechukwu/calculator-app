@@ -6,34 +6,28 @@
   width: 30%;
   padding: 20px;
   border-radius: 15px;
+  user-select: none;
 }
 .container {
-  background-color: rgb(92, 92, 92);
-  font-size: 18px;
-  /* resize: both; */
-  /* min-width: min-content;*/  /* Working on resizable function */
-  /* min-height: min-content;
-  max-width: max-content;
-  max-height: max-content;
-  overflow: auto; */
-  /* display: flex;
-  flex-direction: column; */
+  background-color: rgb(55, 55, 55);
 }
 
 .handle {
-  background-color:  rgb(92, 92, 92);
+  background-color:  rgb(55, 55, 55);
   color: white;
   text-align: center;
   cursor: move; 
-  font-size: 1.25rem;
+  font-size: 1.5rem;
+  height: 2.5rem;
+  user-select: none;
 }
 
 /* Input textarea styles */
 .input-container  {
   width: 100%;
-  box-sizing: border-box; /*Ensures padding doesn't increase the width */
+  box-sizing: border-box; 
   margin-bottom: 10px; 
-  resize: none; /* Prevents the user from breaking your layout */
+  resize: none;
   font-size: 2rem;
   padding: 5px;
 }
@@ -43,6 +37,7 @@ input {
   border-radius: 15px;
   font-size: 2.2rem;
   padding: 0.75em;
+  text-align: right;
 }
 
 
@@ -115,6 +110,27 @@ button:active {
 #solve-problem:active {
   background-color: hsl(40, 100%, 60%);
 }
+
+
+/* .keypad-operator {
+  background-color: hsl(143, 100%, 70%);
+}
+.keypad-operator:hover {
+  background-color: hsl(143, 100%, 60%);
+}
+.keypad-operator:active {
+  background-color: hsl(143, 100%, 70%);
+}
+
+#solve-problem {
+  background-color: hsl(143, 100%, 60%);
+}
+#solve-problem:hover {
+  background-color: hsl(143, 100%, 50%);
+}
+#solve-problem:active {
+  background-color: hsl(143, 100%, 60%);
+} */
 
 
 * {
