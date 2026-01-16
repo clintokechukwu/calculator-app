@@ -44,8 +44,6 @@ function mouseDown (e) {
 }
 
 
-
-
 handle.addEventListener('mousedown', mouseDown)
 
 
@@ -59,7 +57,9 @@ handle.addEventListener('mousedown', mouseDown)
 let operator = '';
 let number1 = '';
 let number2 = '';
-display.value = ''
+display.value = '';
+
+let answer = '';
 
 let problemSolved = false;
 
@@ -88,7 +88,6 @@ function checkPercent () {
 
 // equal function 
 function solveProblem () {
-  let answer = null
   if (number1 && number2) {
     if (operator === '+') {
       checkPercent()
@@ -140,6 +139,7 @@ for (let i = 0; i < keypad.length; i++) {
       return;
     }
 
+    // percentage sign - allows only one percent character per number 
     if (keypad[i].value === '%' && number1.includes('%') && !operator) {
       return;
     }
@@ -161,7 +161,7 @@ for (let i = 0; i < keypad.length; i++) {
       }
     }
 
-    // keypad logic - delete button removes the last character from string and screen
+    // keypad logic - delete button removes the last character from string and display
     if (keypad[i].value === 'delete') {
       console.log('You pressed delete');
       if (number2) {
@@ -175,7 +175,7 @@ for (let i = 0; i < keypad.length; i++) {
     }
 
 
-    // keypad logic - clear button clears all variables and screen output
+    // keypad logic - clear button clears all variables and display output
     if (keypad[i].value === 'clear') {
       number1 = '';
       number2 = '';
@@ -204,7 +204,17 @@ for (let i = 0; i < keypadOperators.length; i++) {
 
     if (number1 && operator.length < 1 && operator !== '=') {
       operator = keypadOperators[i].value;
-      display.value += keypadOperators[i].value
+      display.value += operator
+    }
+
+    if (problemSolved) {
+      problemSolved = false
+      operator = '';
+      number2 = '';
+      number1 = String(answer);
+      display.value = number1
+      operator = keypadOperators[i].value;
+      display.value += operator
     }
 
   });
@@ -214,4 +224,6 @@ for (let i = 0; i < keypadOperators.length; i++) {
 
 // solve event 
 equal.addEventListener('click', solveProblem);
+
+console.log(answer);
 
