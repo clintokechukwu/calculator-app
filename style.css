@@ -5,7 +5,7 @@
   transform: translate(-50%, -50%);
   width: 30%;
   padding: 20px;
-  border-radius: 15px;
+  border-radius: 45px;
   user-select: none;
 }
 .container {
@@ -32,10 +32,10 @@
   padding: 5px;
 }
 input {
-  width: 90%;
+  width: 85%;
   border: none;
   border-radius: 15px;
-  font-size: 2.2rem;
+  font-size: 3rem;
   padding: 0.75em;
   text-align: right;
 }
@@ -47,13 +47,14 @@ button {
   width: 25%;
   height: 25%;
   font-size: 2rem;
-  padding: 1.2em;
+  padding: 1em;
+  margin: 5px;
   font-weight: bold;
   text-align: center;
   border: none;
   background-color: hsl(0, 0%, 82%);
   cursor: pointer;
-  border-radius: 50px;
+  border-radius: 40px;
   overflow: hidden;
 }
 
