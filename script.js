@@ -1,14 +1,8 @@
 'use strict';
 
-const keypad = document.querySelectorAll('.keypad');
-const keypadOperators = document.querySelectorAll('.keypad-operator');
-const display = document.getElementById('display');
-const equal = document.getElementById('solve-problem');
+
 
 const handle = document.querySelector('.container');
-
-
-
 
 // Calculator Movability //
 let newX = 0, newY = 0, startX = 0, startY = 0;
@@ -43,17 +37,19 @@ function mouseDown (e) {
   document.addEventListener('mouseup', mouseUp);
 }
 
-
 handle.addEventListener('mousedown', mouseDown)
 
 
 
 
+// calculator variables 
+const keypad = document.querySelectorAll('.keypad');
+const keypadOperators = document.querySelectorAll('.keypad-operator');
+const display = document.getElementById('display');
+const equal = document.getElementById('solve-problem');
 
 
-
-
-// Calculator Operations //
+// calculator Operations //
 let operator = '';
 let number1 = '';
 let number2 = '';
@@ -61,6 +57,7 @@ display.value = '';
 
 let answer = '';
 
+let negativeNumber = false;
 let problemSolved = false;
 
 
@@ -86,7 +83,7 @@ function checkPercent () {
   }
 }
 
-// equal function 
+// solve function 
 function solveProblem () {
   if (number1 && number2) {
     if (operator === '+') {
@@ -117,8 +114,7 @@ function solveProblem () {
 
 
 
-
-// numbers click logic
+// keypad(non-operators) click logic
 for (let i = 0; i < keypad.length; i++) {
   keypad[i].addEventListener('click', function () {
 
@@ -129,7 +125,10 @@ for (let i = 0; i < keypad.length; i++) {
       number1 = '';
       number2 = '';
       operator = '';
+      
     }
+
+
 
     // decimal logic - allows only one decimal per number
     if (keypad[i].value === '.' && number1.includes('.') && !operator) {
@@ -148,8 +147,9 @@ for (let i = 0; i < keypad.length; i++) {
     }
 
 
+
     // keypad logic - logs numbers and operators to desired variable and displays it to screen
-    if (keypad[i].value !== 'delete' && keypad[i].value !== 'clear' ) {
+    if (keypad[i].value !== 'delete' && keypad[i].value !== 'clear' && keypad[i].value !== '+/-') {
       if (number1.length <= 9 && !operator) {
         number1 += keypad[i].value
         display.value += keypad[i].value
@@ -160,6 +160,32 @@ for (let i = 0; i < keypad.length; i++) {
         console.log(`number2 is ${number2}`)
       }
     }
+
+
+
+    // +/- logic - toggles negative sign 
+    if (keypad[i].value === '+/-') {
+      if (number1 && !number1.includes('-') && !number2 && !operator) {
+        number1 = "-" + number1
+        display.value = number1
+        console.log(`Number1 is ${number1}`);
+      } else if (number1 && number1.includes('-') && !number2 && !operator) {
+        number1 = number1.slice(1)
+        display.value = number1
+        console.log(`Number1 is ${number1}`);
+      }
+      if (number2 && !number2.includes('-')) {
+        number2 = "-" + number2
+        display.value = number1 + operator + number2
+        console.log((`Number 2 is ${number2}`));
+      } else if (number2 && number2.includes('-')) {
+        number2 = number2.slice(1)
+        display.value = number1 + operator + number2
+        console.log(`Number 2 is ${number2}`);
+      }
+    }
+
+
 
     // keypad logic - delete button removes the last character from string and display
     if (keypad[i].value === 'delete') {
@@ -175,6 +201,7 @@ for (let i = 0; i < keypad.length; i++) {
     }
 
 
+
     // keypad logic - clear button clears all variables and display output
     if (keypad[i].value === 'clear') {
       number1 = '';
@@ -182,13 +209,6 @@ for (let i = 0; i < keypad.length; i++) {
       operator = '';
       display.value = ''
     }
-
-
-    // alert to new features yet to be added
-    if (keypad[i].textContent === '+/-') {
-      alert('Feature coming soon...')
-    }
-    
   });
 
 }
@@ -198,9 +218,6 @@ for (let i = 0; i < keypad.length; i++) {
 // operator click logic
 for (let i = 0; i < keypadOperators.length; i++) {
   keypadOperators[i].addEventListener('click', function () {
-    // operator = keypadOperators[i].value;
-    // console.log(`You pressed ${operator}`)
-    // display.value += operator;
 
     if (number1 && operator.length < 1 && operator !== '=') {
       operator = keypadOperators[i].value;
